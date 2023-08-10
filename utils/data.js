@@ -1,14 +1,26 @@
-const thoughts = [
-    "I had a thought today",
-    "Thinking about you...",
-    "I've been thoughted",
-    "Too many thoughts, too little time",
-    "Thoughting of you too..."
-]
+const getRandomUser = (i) => {
 
-const randomizer = (arr) => arr[Math.floor(Math.random() * arr.length)]
+    const users = [
+        "teaandbiscuits",
+        "gibbous",
+        "cokebottle420",
+        "gistah",
+        "CoolingBreeze"
+    ]
 
-const getRandomUser = () => `${randomizer(users)}`
-const getRandomThought = () => `${randomizer(thoughts)}`
+    return users[i]
+
+}
+const getRandomThought = (i) => {
+    const thoughts = [
+        "I had a thought today",
+        "Thinking about you...",
+        "I've been thoughted",
+        "Too many thoughts, too little time",
+        "Thoughting of you too..."
+    ]
+
+    return [i]
+}
 
 module.exports = { getRandomThought, getRandomUser}
