@@ -47,6 +47,17 @@ const thoughtController = {
         } catch (err) {
             res.status(500).json(err)
         }
+    },
+
+    async updateThought(req, res) {
+        try {
+            const thoughtData = await Thought.findOneAndUpdate(
+                {_id: req.params.userid},
+                {$set: req.body}
+            )
+        } catch (err) {
+            res.status(500).json(err)
+        }
     }
 }
 
