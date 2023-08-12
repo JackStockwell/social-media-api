@@ -18,7 +18,7 @@ const thoughtController = {
         try {
 
             const thoughtData = await Thought.findOne({
-                _id: req.params.thoughtId
+                _id: req.params.thoughtID
             })
 
             if (!thoughtData) {
@@ -38,10 +38,16 @@ const thoughtController = {
             const thoughtData = await Thought.create(req.body);
 
             const userData = await User.findOneAndUpdate(
-                {_id: req.body.userid},
-                {$push: {thoughts: thoughtData._id}},
+                {_id: req.body.userID },
+                {$addToSet: {thoughts: thoughtData._id}},
                 {new: true}
             )
+
+            if (!userData) {
+                res
+                    .status(404)
+                    .json({message: "No user was found with that ID."})
+            }
 
 
         } catch (err) {
@@ -52,8 +58,10 @@ const thoughtController = {
     async updateThought(req, res) {
         try {
             const thoughtData = await Thought.findOneAndUpdate(
-                {_id: req.params.userid},
-                {$set: req.body}
+                {_id: req.params.userID},
+                {$set: 
+                    {thoughtText: req.body}
+                }
             )
         } catch (err) {
             res.status(500).json(err)
