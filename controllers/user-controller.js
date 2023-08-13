@@ -177,7 +177,7 @@ const userController = {
 
     // Remove a friend for the their friend list.
     // DELETE '/:userID/friends/:friendID'
-    async friendUser (req, res) {
+    async friendRemove (req, res) {
         try {
 
             const friendData = await User.findOne(

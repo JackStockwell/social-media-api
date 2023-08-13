@@ -11,5 +11,9 @@ router
         .get(userController.getUserSingle)
         .put(userController.updateUser)
         .delete(userController.deleteUser);
+router
+    .route('/:userID/friends/:friendID')
+        .post(userController.friendUser)
+        .delete(userController.friendRemove)
 
 module.exports = router;
