@@ -33,11 +33,10 @@ connection.once('open', async () => {
         })
     }
 
-    const userData = await User.collection.insertMany(users)
+    await User.collection.insertMany(users)
 
     for (let i = 0; i < 5; i++) {
         const user = getRandomUser(i)
-        console.log(user)
 
         const newThought = await Thought.insertMany({
             thoughtText: getRandomThought(i),

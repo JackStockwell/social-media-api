@@ -32,6 +32,7 @@ const thoughtController = {
                     .json({
                         message: "No thought post with that ID was found!"
                     })
+                return
             }
 
             res.status(200).json(thoughtData)
@@ -49,7 +50,7 @@ const thoughtController = {
             const thoughtData = await Thought.create(req.body);
 
             // Finds the user that made the thought and updates the users thoughts documents.
-            const userData = await User.findOneAndUpdate(
+            await User.findOneAndUpdate(
                 {_id: req.body.userID },
                 {$addToSet: {thoughts: thoughtData._id}},
                 {new: true}
@@ -61,6 +62,7 @@ const thoughtController = {
                     .json({
                         message: "No thought post with that ID was found!"
                     })
+                return
             }
 
             res.status(200).json({
@@ -89,6 +91,7 @@ const thoughtController = {
                     .json({
                         message: "No thought post with that ID was found!"
                     })
+                return
             }
 
             res.status(200)
@@ -115,6 +118,7 @@ const thoughtController = {
                     .json({
                         message: "No thought post with that ID was found!"
                     })
+                return
             }
 
             res
