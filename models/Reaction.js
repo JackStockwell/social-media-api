@@ -20,9 +20,6 @@ const reactionSchema = (
             default: Date.now,
             get: (timestamp) => formatDate(timestamp)
         }
-    },
-    {
-
     }
 )
 
