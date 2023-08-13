@@ -1,4 +1,4 @@
-const { Thought, User } = require('../models')
+const { Thought, User, Reaction } = require('../models')
 
 
 const thoughtController = {
@@ -126,6 +126,57 @@ const thoughtController = {
                 .json({
                     message: "Successfully deleted thought post!"
                 })
+
+        } catch (err) {
+            console.error(err)
+            res.status(500).json(err)
+        }
+    },
+
+    // Adds a reaction to a post!
+    // POST `/api/thoughts/:thoughtID/reactions`
+    async reactionAdd (req, res) {
+        try {
+            const thoughtData = Thought.findOneAndUpdate(
+                {_id: req.params.thoughtID},
+                {$addToSet: {reactions: req.body}},
+                {runValidators: true, new: true}
+            )
+
+            if (!thoughtData) {
+                res.status(404)
+                    .json({
+                        message: "No thought post with that ID was found!"
+                    })
+                return
+            }
+
+            res.status(200).json(thoughtData)
+        } catch (err) {
+            console.error(err)
+            res.status(500).json(err)
+        }
+    },
+
+    // Adds a reaction to a post!
+    // DELETE `/api/thoughts/:thoughtID/reactions`
+    async reactionDelete (req, res) {
+        try {
+            const thoughtData = Thought.findOneAndUpdate(
+                {_id: req.params.thoughtID},
+                {$pull: {reactions: req.body.reactionID}},
+                {runValidators: true, new: true}
+            )
+
+            if (!thoughtData) {
+                res.status(404)
+                    .json({
+                        message: "No thought post with that ID was found!"
+                    })
+                return
+            }
+
+            res.status(200).json(thoughtData)
 
         } catch (err) {
             console.error(err)

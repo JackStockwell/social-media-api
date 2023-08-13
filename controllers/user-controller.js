@@ -77,10 +77,10 @@ const userController = {
     // PUT '/:id'
     async updateUser (req, res) {
         try {
-            
+
             // Finds the user, updates their infomation.
             const userData = await User.findOneAndUpdate(
-                {_id: req.body.id},
+                {_id: req.params.id},
                 {$set: req.body},
                 {runValidators: true, new: true}
             )
@@ -93,7 +93,9 @@ const userController = {
                     })
                 return
             }
-
+            
+            res.status(200).json(userData)
+            return
         } catch (err) {
             console.error(err)
             res.status(500).json(err)
@@ -126,17 +128,88 @@ const userController = {
                 {_id: req.params.id}
             )
 
-            res
-                .status(200)
-                .json({
-                    message: "User and their thoughts forgotten from the Database!"
-                })
+            res.status(200).json({
+                message: "User and their thoughts forgotten from the Database!"
+            })
             return
         } catch (err) {
             console.error(err)
             res.status(500).json(err)
         }
+    },
+
+    // FRIEND ROUTES
+
+    // Add a new friend to a user's friend list.
+    // POST '/:userID/friends/:friendID'
+    async friendUser (req, res) {
+        try {
+
+            const friendData = await User.findOne(
+                {_id: req.params.friendID}
+            )
+
+            const userData = await User.findOneAndUpdate(
+                {_id: req.params.userID},
+                {$addToSet: {friends: friendData._id}},
+                {new: true}
+            )
+            
+            // Ensures both friend and user ids are correct.
+            if (!userData || !friendData) {
+                res
+                    .status(404)
+                    .json({
+                        message: "No user(s) found with that ID! Ensure both IDs are valid!"
+                    })
+                return
+            }
+
+            res.status(200).json(userData)
+            return
+            
+
+        } catch (err) {
+            console.error(err)
+            res.status(500).json(err)
+        }
+    },
+
+    // Remove a friend for the their friend list.
+    // DELETE '/:userID/friends/:friendID'
+    async friendRemove (req, res) {
+        try {
+
+            const friendData = await User.findOne(
+                {_id: req.params.friendID}
+            )
+
+            const userData = await User.updateOne(
+                {_id: req.params.userID},
+                {$pull: {friends: friendData._id}},
+                {new: true}
+            )
+
+            // Ensures both friend and user ids are correct.
+            if (!userData || !friendData) {
+                res
+                    .status(404)
+                    .json({
+                        message: "No user(s) found with that ID! Ensure both IDs are valid!"
+                    })
+                return
+            }
+
+            res.status(200).json(userData)
+            return
+            
+            
+        } catch (err) {
+            console.error(err)
+            res.status(500).json(err)
+        }
     }
+    
 }
 
 module.exports = userController;
