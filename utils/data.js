@@ -20,7 +20,7 @@ const getRandomThought = (i) => {
         "Thoughting of you too..."
     ]
 
-    return [i]
+    return thoughts[i]
 }
 
 module.exports = { getRandomThought, getRandomUser}

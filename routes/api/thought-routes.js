@@ -8,7 +8,8 @@ router
         .post(thoughtController.newThought)
 
 router
-    .route('/:thoughtId')
-        .get()
+    .route('/:id')
+        .get(thoughtController.getThoughtSingle)
+        .delete(thoughtController.deleteThought)
 
 module.exports = router;
