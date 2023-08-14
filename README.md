@@ -3,9 +3,19 @@
 ![Github top language](https://img.shields.io/github/languages/top/JackStockwell/social-media-api)
 [![Link to node Js version download](https://img.shields.io/badge/node-v16.18.0-green)](https://nodejs.org/download/release/latest-v16.x/)
 
+## Screenshot
+
+![Screen gif of the APP being used](/screencap.gif)
+
 ## Description
 
+A small project involving MongoDB and Moongoose NPM. It allows backend creation of a new user, their 'thoughts'. You can also has add reacations to the their thoughts, which act as comments. Has all 4 CRUD methods.
 
+This is my first back-end RESTful API made using MongoDB and Mongoose package. Using past expereience of using mySQL and Sequelize along with my now several projects of working with express, I was able to create this in good time. It has increased my knowledge of MongoDB and Mongoose. 
+
+A struggle however was the creation of the seed data, as it takes a different approach to mySQL as the objectIDs are generated. However once this was solved it was relatively easy to develop.
+
+I do believe however i could make it more intuitive such as adding a friend also adds you to their list etc.
 
 ## Table of Contents
 
@@ -61,3 +71,4 @@ You will need an external tool like [Postman](https://www.postman.com/) or Insom
 Infomation on the Unlince can be found [here](https://unlicense.org/)
 
 ## Credits
+
