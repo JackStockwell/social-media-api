@@ -1,4 +1,4 @@
-const { json } = require('express');
+// Imports
 const connection = require('../config/connection');
 const { User, Thought } = require('../models');
 const { getRandomThought, getRandomUser } = require('./data')
@@ -8,6 +8,7 @@ connection.on('error', (err) => err);
 
 connection.once('open', async () => {
     
+    // Checks to drop the databases.
     let userCheck = await connection.db.listCollections({ name: 'users' }).toArray();
     if (userCheck.length) {
         console.log(`Users collection detected, dropping users...`)
@@ -34,7 +35,8 @@ connection.once('open', async () => {
     }
 
     await User.collection.insertMany(users)
-
+    
+    // Creates a new thought.
     for (let i = 0; i < 5; i++) {
         const user = getRandomUser(i)
 
@@ -44,18 +46,13 @@ connection.once('open', async () => {
             username: user,
         })
 
-        await User.findOneAndUpdate({
-            username: user
-        },{
-            $addToSet: {thoughts: newThought}
-        },{
-            new:true
-        })
-
-
-        
+        // Adds thoughts to a user.
+        await User.findOneAndUpdate(
+            { username: user },
+            { $addToSet: {thoughts: newThought} },
+            { new:true }
+        )
     }
-        
 
     console.info('Seeding complete! 🌱');
     process.exit(0);
