@@ -65,9 +65,7 @@ const thoughtController = {
                 return
             }
 
-            res.status(200).json({
-                message: "New post created!"
-            })
+            res.status(200).json(thoughtData)
 
         } catch (err) {
             console.error(err)
