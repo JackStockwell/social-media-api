@@ -24,7 +24,7 @@ const userController = {
         try {
 
             const userData = await User.findOne(
-                {_id: req.params}
+                {_id: req.params.id}
             )
 
             // Validation check, ensures that a valid id was found/parsed.
