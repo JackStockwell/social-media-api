@@ -72,3 +72,6 @@ Infomation on the Unlince can be found [here](https://unlicense.org/)
 
 ## Credits
 
+[Mongoose Doc](https://mongoosejs.com/docs/)
+[MongoDB official](https://www.mongodb.com/developer/languages/javascript/getting-started-with-mongodb-and-mongoose/)
+
