@@ -6,7 +6,8 @@ const userController = {
     async getUsers (req, res) {
         try {
             // Finds all users
-            const userData = await User.find({})
+            const userData = await User
+                .find({})
                 .select('-__v')
                 .populate('thoughts')
 
@@ -23,9 +24,10 @@ const userController = {
     async getUserSingle (req, res) {
         try {
 
-            const userData = await User.findOne(
-                {_id: req.params.id}
-            )
+            const userData = await User
+                .findOne({_id: req.params.id})
+                .select('-__v')
+                .populate('thoughts')
 
             // Validation check, ensures that a valid id was found/parsed.
             if (!userData) {
@@ -129,7 +131,7 @@ const userController = {
             )
 
             res.status(200).json({
-                message: "User and their thoughts forgotten from the Database!"
+                message: `User and their thoughts forgotten from the Database!`
             })
             return
         } catch (err) {
@@ -200,7 +202,9 @@ const userController = {
                 return
             }
 
-            res.status(200).json(userData)
+            res.status(200).json({
+                message: "Users are no longer friends :("
+            })
             return
             
             

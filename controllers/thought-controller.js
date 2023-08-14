@@ -22,9 +22,9 @@ const thoughtController = {
         try {
 
             // Find thought with id.
-            const thoughtData = await Thought.findOne(
-                {_id: req.params.id}
-            )
+            const thoughtData = await Thought
+                .findOne({_id: req.params.id})
+                .populate('reactions')
             
             // Validation check, ensures that a valid id was found/parsed.
             if (!thoughtData) {
@@ -96,7 +96,7 @@ const thoughtController = {
 
             res.status(200)
                 .json({
-                    message: "Successfully update thought post!"
+                    message: `Successfully updated thought post! ${thoughtData._id}`
                 })
         } catch (err) {
             console.error(err)
