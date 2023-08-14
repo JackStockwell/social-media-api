@@ -134,10 +134,11 @@ const thoughtController = {
     },
 
     // Adds a reaction to a post!
-    // POST `/api/thoughts/:thoughtID/reactions`
+    // POST `/:thoughtID/reactions`
     async reactionAdd (req, res) {
         try {
-            const thoughtData = Thought.findOneAndUpdate(
+
+            const thoughtData = await Thought.findOneAndUpdate(
                 {_id: req.params.thoughtID},
                 {$addToSet: {reactions: req.body}},
                 {runValidators: true, new: true}
@@ -159,12 +160,13 @@ const thoughtController = {
     },
 
     // Adds a reaction to a post!
-    // DELETE `/api/thoughts/:thoughtID/reactions`
+    // DELETE `/:thoughtID/reactions`
     async reactionDelete (req, res) {
         try {
-            const thoughtData = Thought.findOneAndUpdate(
+
+            const thoughtData = await Thought.findOneAndUpdate(
                 {_id: req.params.thoughtID},
-                {$pull: {reactions: req.body.reactionID}},
+                {$pull: {reactions: {reactionId: req.body.reactionId}}},
                 {runValidators: true, new: true}
             )
 
