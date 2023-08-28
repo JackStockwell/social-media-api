@@ -26,7 +26,7 @@ I do believe however i could make it more intuitive such as adding a friend also
 
 ## Installation 
 
-I would recommend watching my full guide [here] for a more streamlined experience. If not, see below.
+I would recommend watching my full guide [here](https://drive.google.com/file/d/1u5WADCq0ukM81_ZcOcL1-QbQxYjpcW9w/view) for a more streamlined experience. If not, see below.
 
 ### Written Tutorial
 
